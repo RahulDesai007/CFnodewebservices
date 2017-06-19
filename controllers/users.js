@@ -12,6 +12,12 @@ global.users=[];
 
 global.campaign=[];
 
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 global.filteredcampaign=[];
 router.get('/userdetail',cors(),function(req,res,next){
@@ -154,6 +160,15 @@ error:true
 	
 });
 
+router.post('/campaign-detail',cors(),function(req,res,next){
+	console.log("entering in comments",req.body);
+console.log(global.users.length);
+return res.json({
+message:'successful',
+error:false
+});
+});
+
 router.get('/campaigndetail',cors(),function(req,res,next){
 	console.log("entering in campaigndetail service to fetch all campaign");
 return res.json({
@@ -177,6 +192,7 @@ error:true
 	  }
 	  
 	}
+	
 console.log(req.body);
 global.campaign.push(req.body);	
 
@@ -185,6 +201,8 @@ message:'success',
 error:false
 });
 });
+
+
 
 router.post('/testservice', cors(),function(req,res){
 	console.log(req.body);
