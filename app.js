@@ -37,7 +37,7 @@ app.get('/report',function(req,res){
      var report = ([{"CampaignName":"Seed Funding",
               "PledgeAmount":"10000",
               "RecievedAmount":"10000",
-              "FundRecieved":"100%",
+              "FundRecieved":"50%",
               "Status":"Recieved",
             //Action:'button'
         },
@@ -62,8 +62,8 @@ app.get('/report',function(req,res){
          
 
 app.get('/funder_dashboard',function(req,res){
-     var CampaignName = ["Seed Funding","Hamari Ganga"];
-    if("CampaignName" === "Seed Funding"){
+     
+    {
         ({"Pledge":"1000",
           "Progressbar": "100%",
           "Reward": "T-Shirt",
@@ -73,7 +73,7 @@ app.get('/funder_dashboard',function(req,res){
           "TotalDays": "90"})
           console.log("0");
     }
-    else if ("CampignName" === "Hamari Ganga"){
+    {
         ({"Pledge":"10000",
           "Progressbar": "50%",
           "Reward": "T-Shirt",
@@ -83,7 +83,7 @@ app.get('/funder_dashboard',function(req,res){
           "TotalDays": "90"})
           console.log("1");
     }
-    else if ("CampaignName" === "Plant Tree"){
+    {
         ({"Pledge":"500000",
           "Progressbar": "70%",
           "Reward": "T-Shirt",
@@ -131,7 +131,38 @@ app.get('/fund-raiser/status-of-fund-transfer',function(req,res){
 
 app.get('/fund-raiser/dashboard',function(req,res){
     console.log(req.body);
-    res.send({status:'sucessfully reched to fundraiser dashbord'})
+    
+    {
+        ({"Pledge":"1000",
+          "Progressbar": "100%",
+          "Reward": "T-Shirt",
+          "AmountRaised" : "35000",
+          "TotalAmount" : "50000",
+          "DaysLeft": "10",
+          "TotalDays": "90"})
+          console.log("0");
+    }
+    {
+        ({"Pledge":"10000",
+          "Progressbar": "50%",
+          "Reward": "T-Shirt",
+          "AmountRaised" : "30000",
+          "TotalAmount" : "60000",
+          "DaysLeft": "20",
+          "TotalDays": "90"})
+          console.log("1");
+    }
+    {
+        ({"Pledge":"500000",
+          "Progressbar": "70%",
+          "Reward": "T-Shirt",
+          "AmountRaised" : "24000",
+          "TotalAmount" : "70000",
+          "DaysLeft": "30",
+          "TotalDays": "80"})
+          console.log("2");
+    }
+    console.log(req.body);
 });
 
 app.get('/fund-raiser/list-approve-bids',function(req,res){
@@ -199,26 +230,83 @@ app.get('/service-provider/participants',function(req,res){
 
 app.get('/service-provider/campaigns',function(req,res){
     console.log(req.body);
-    res.send({ID:'1',
-              Name:'Help',
-              Type:'Save Water Campaign',
-            Action:'button'})
+    res.send([{"ID":"1",
+              "Name":"Help",
+              "Type":"Save Water Campaign",
+            },
+            {"ID":"2",
+              "Name":"Promote",
+              "Type":"Animal Exploitation",
+            },
+            {"ID":"3",
+              "Name":"Partner",
+              "Type":"Orphains Campaign",
+            }])
 });
 
 app.get('/service-provider/report',function(req,res){
     console.log(req.body);
-    res.send({Status:'sucess'})
+    res.send({Status:'success'})
 });
 
 app.get('/service-provider/transaction-history',function(req,res){
     console.log(req.body);
-    res.send({Status:'success'})
+    res.send([{"CampaignName":"Save Water Campaign",
+              "Start Date":"1-06-2017",
+              "End Date":"3-10-2017",
+              "Goal Amount":"3000",
+              "Funder Name":"Rakesh Bharati",
+              "Funder Contributer":"19000",
+               "Fund Status":"Fund Recieved"
+            //Action:'button'
+        },
+            {"CampaignName":"Animal",
+              "Start Date":"20-06-2017",
+              "End Date":"30-06-2017",
+              "Goal Amount":"5000",
+              "Funder Name":"Rahul Desai",
+              "Funder Contributer":"2000",
+               "Fund Status":"Still Pending"
+          //  Action:'button'
+        },
+            {"CampaignName":"Orphains",
+              "Start Date":"10-7-2017",
+              "End Date":"20-7-2017",
+              "Goal Amount":"8000",
+              "Funder Name":"Arun Hossanami",
+              "Funder Contributer":"40000",
+               "Fund Status":"Fund Recieved"
+         //   Action:'button'
+        }])
+    
 });
 
 app.post('/service-provider/froala-editor',function(req,res){
-    console.log(req.body);
-    res.send({status:'your story is sucessfully submitted'})
+	console.log(req);
+	console.log("entering in campaigndetail service to store campaign details");
+	for(let i=0;i<global.campaign.length;i++){
+
+      if(global.campaign[i].campaigntitle===req.body.campaigntitle ){
+		  console.log("entering in if block after checking campaigntitle",req.body.campaigntitle);
+		  
+		 return res.json({
+message:'campaignname already exist',
+error:true
 });
+	  }
+	  
+	}
+	
+console.log(req.body);
+global.campaign.push(req.body);	
+
+return res.json({
+message:'success',
+error:false
+});
+});
+
+
 
 app.post('/funder_dashboard/rating',function(req,res){
     console.log(req.body);

@@ -202,6 +202,31 @@ error:false
 });
 });
 
+router.get('/createcampaign',cors(),function(req,res,next){
+	console.log(req);
+	console.log("entering in campaigndetail service to store campaign details");
+	for(let i=0;i<global.campaign.length;i++){
+
+      if(global.campaign[i].campaigntitle===req.body.campaigntitle ){
+		  console.log("entering in if block after checking campaigntitle",req.body.campaigntitle);
+		  
+		 return res.json({
+message:'campaignname already exist',
+error:true
+});
+	  }
+	  
+	}
+	
+console.log(req.body);
+global.campaign.push(req.body);	
+
+return res.json({
+message:'success',
+error:false
+});
+});
+
 
 
 router.post('/testservice', cors(),function(req,res){
