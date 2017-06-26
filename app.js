@@ -44,7 +44,7 @@ app.get('/report',function(req,res){
             {"CampaignName":"Humari Ganga",
               "PledgeAmount":"15000",
               "RecievedAmount":"0",
-              "FundRecieved":"66.67%",
+              "FundRecieved":"66.77%",
               "Status":"Pending",
           //  Action:'button'
         },
@@ -170,7 +170,7 @@ app.get('/fund-raiser/list-approve-bids',function(req,res){
          var Bids = ([{"CampaignName":"Plant Tree",
               "FunderName":"Nikhil Gupta(4 outof 5)",
               "AmountNeeded":"30000",
-              "Bid":"1000"
+              "Bid":"100000000"
             //Action:'button'
         },
             {"CampaignName":"Gift a dream camp",
@@ -264,7 +264,7 @@ app.get('/service-provider/transaction-history',function(req,res){
               "Start Date":"20-06-2017",
               "End Date":"30-06-2017",
               "Goal Amount":"5000",
-              "Funder Name":"Rahul Desai",
+              "Funder Name":"shraddha",
               "Funder Contributer":"2000",
                "Fund Status":"Still Pending"
           //  Action:'button'
